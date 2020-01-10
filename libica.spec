@@ -1,7 +1,7 @@
 Summary: Library for accessing ICA hardware crypto on IBM zSeries
 Name: libica
 Version: 2.3.0
-Release: 3%{?dist}
+Release: 1%{?dist}
 License: CPL
 Group: System Environment/Libraries
 URL: http://sourceforge.net/projects/opencryptoki/
@@ -73,12 +73,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/libica.la
 
 
 %changelog
-* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 2.3.0-3
-- Mass rebuild 2014-01-24
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2.3.0-2
-- Mass rebuild 2013-12-27
-
 * Fri May 03 2013 Dan Horák <dan[at]danny.cz> - 2.3.0-1
 - updated to 2.3.0
 
