@@ -1,0 +1,25 @@
+diff -up libica-2.3.0/configure.in.version libica-2.3.0/configure.in
+--- libica-2.3.0/configure.in.version	2013-03-20 10:58:27.000000000 +0100
++++ libica-2.3.0/configure.in	2013-05-03 10:08:28.000000000 +0200
+@@ -3,6 +3,9 @@
+ 
+ AC_INIT(libica, 2.3.0, ingo.tuchscherer@linux.vnet.ibm.com)
+ 
++LIBICA_API=2.0
++AC_SUBST(LIBICA_API)
++
+ cmdline_CFLAGS="$CFLAGS"
+ 
+ # Compute $target
+diff -up libica-2.3.0/src/Makefile.am.version libica-2.3.0/src/Makefile.am
+--- libica-2.3.0/src/Makefile.am.version	2012-04-23 15:07:21.000000000 +0200
++++ libica-2.3.0/src/Makefile.am	2013-05-03 10:08:03.000000000 +0200
+@@ -2,7 +2,7 @@ INCLUDES = -I ./include -I ../include
+ 
+ lib_LTLIBRARIES = libica.la
+ 
+-libica_la_LDFLAGS = -release $(PACKAGE_VERSION) -lrt -lcrypto
++libica_la_LDFLAGS = -release $(LIBICA_API) -lrt -lcrypto
+ 
+ libica_la_SOURCES = icalinux.c ica_api.c init.c icastats_shared.c \
+ 		    s390_rsa.c s390_crypto.c s390_common.c s390_des.c \

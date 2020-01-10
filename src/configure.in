@@ -1,0 +1,78 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_INIT(libica, 2.3.0, ingo.tuchscherer@linux.vnet.ibm.com)
+
+cmdline_CFLAGS="$CFLAGS"
+
+# Compute $target
+AC_CANONICAL_TARGET
+
+AM_INIT_AUTOMAKE(1.9.5)
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_LIBTOOL
+
+# Checks for libraries.
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([fcntl.h memory.h stdlib.h string.h strings.h sys/ioctl.h unistd.h \
+		  errno.h stdio.h pthread.h semaphore.h openssl/sha.h openssl/aes.h \
+		  openssl/rand.h openssl/rsa.h linux/types.h sys/ioctl.h])
+case "$target" in
+     *s390*)
+          AC_CHECK_HEADERS(openssl/des.h)
+          ;;
+     *)
+          AC_CHECK_HEADER(linux/icaioctl.h, ,
+                          AC_MSG_ERROR([*** Unable to find linux/icaioctl.h])) 
+          ;;
+esac
+
+
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+AC_C_VOLATILE
+
+# Checks for library functions.
+AC_PROG_GCC_TRADITIONAL
+AC_FUNC_MALLOC
+AC_FUNC_MEMCMP
+AC_FUNC_STAT
+AC_CHECK_FUNCS([bzero memset])
+
+CFLAGS="$cmdline_CFLAGS"
+
+case $target in
+     *s390x*)
+          CFLAGS="$CFLAGS -D_LINUX_S390X_ -D_LINUX_S390_ -Wall" 
+          ;;
+     *s390*)
+          CFLAGS="$CFLAGS -D_LINUX_S390_ -m31 -Wall" 
+          ;;
+esac
+
+
+AC_ARG_ENABLE(debug, 
+              [--enable-debug          turn on debugging flags],
+              [enable_debug="yes"],)
+
+if test "x$enable_debug" = xyes; then
+	CFLAGS="$CFLAGS -g -O0"
+	AC_MSG_RESULT([*** Enabling debugging at user request ***])
+else
+	CFLAGS="$CFLAGS -O2"
+fi
+
+AC_OUTPUT([Makefile src/Makefile include/Makefile])
+
+echo "CFLAGS=$CFLAGS"

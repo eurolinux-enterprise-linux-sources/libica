@@ -1,0 +1,47 @@
+v2.3.0
+ Changes since Version 2.2.0:
+ - Introduced new API to recieve list of supported algorithms
+v2.2.0
+ Introduce support for more MSA4 extensions.
+ New symetric encryption modes:
+ - CBC-CS (DES, TDES, AES-[128|192|256])
+ - CMAC (DES, TDES, AES-[128|192|256])
+ - CCM (AES-[128|192|256])
+ - GCM (AES-[128|256])
+v2.1.1
+ Changes since Version 2.1.0:
+ - [PATCH] synchronize shared memory ref counting
+ - [PATCH] Fix result/error handling in testcase for ica_get_version()
+ - [PATCH] Fix temporary buffer allocation in ica_get_version()
+ - [UPDATE] Interface (API) description
+ - [PATCH] Fix commandline argument checking in RSA testcase
+ - [PATCH] Remove duplicate entry from target list
+v2.1.0
+- Introduce support for MSA4 extensions. New symmetric encryption modes:
+  CFB, CTR, OFB, XTS, CMAC
+- New API calls:
+  - ica_get_version(...)
+v2.0.6
+Fix for tracker item 3202845.
+  Improve online help for icastats.
+v2.0.5
+Fix for performance improvement
+  Remove signal handler wrapping of crypto instructions.
+v2.0.4
+Fix for STCK buffer length
+  Correctly adjust the STCK buffer length in the PRNG based on whether
+  we are running in 31 or 64 bit.
+v2.0.3
+minor wording fix in icastats tool:
+  changed output wording from SHAxxx to SHA-xxx
+Bugfix for:
+  libica abends with illegal instuction when CPACF is disabled.
+v2.0.2
+Bug fixes in asm, stcke for 31 bit, and fixes in programming samples
+v2.0.1
+Add locking for shared memory segment, which is needed when icastats
+is linked dynamically against libica.
+v2.0
+Substitute software fallbacks with lowlevel OpenSSL function calls.
+Rewrite most of libica.
+Only Linux on System z code.
